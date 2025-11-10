@@ -13,7 +13,7 @@ export default function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if (!username || !email || !password) {
+    if (!username || !password) {
       alert("All fields are required!");
       return;
     }
@@ -21,7 +21,6 @@ export default function Register() {
     try {
       axios.post(`${BASE_URL}/api/register/`, {
         username,
-        email,
         password,
       });
 
