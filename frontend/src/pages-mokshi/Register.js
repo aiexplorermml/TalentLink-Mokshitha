@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -11,28 +12,27 @@ export default function Register() {
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!username || !password) {
-      alert("All fields are required!");
-      return;
-    }
+  if (!username || !password) {
+    alert("Username & password are required!");
+    return;
+  }
 
-    try {
-      axios.post(`${BASE_URL}/api/register/`, {
-        username,
-        password,
-      });
+  try {
+    const res = await axios.post(`${BASE_URL}/api/register/`, {
+      username,
+      password,
+    });
 
-      alert("✅ Registered successfully! Please login now.");
-      localStorage.setItem("registeredUser", username);
-      localStorage.setItem("profileId", res.data.id);
-      navigate("/login");
-    } catch (error) {
-      console.error(error.response?.data || error.message);
-      alert("Registration failed! Try again.");
-    }
-  };
+    alert("✅ Registered successfully! Please login");
+    navigate("/login");
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    alert("Registration failed!");
+  }
+};
+
 
   return (
   <div className="login-wrapper-light">
